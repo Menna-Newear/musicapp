@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:musicapp/features/home/homeview.dart';
 import 'package:musicapp/features/widgets/customAlertDialogMethod.dart';
 import 'package:musicapp/utilits/assets.dart';
+import 'package:musicapp/utilits/constants/constant.dart';
 import 'package:musicapp/utilits/constants/fontsStyles.dart';
 import 'package:musicapp/utilits/constants/validateAuth.dart';
 
@@ -34,10 +35,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   void initState() {
+    _nameController = TextEditingController();
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
     _confirmPasswordController = TextEditingController();
     // Focus Nodes
+    _nameFocusNode = FocusNode();
     _emailFocusNode = FocusNode();
     _passwordFocusNode = FocusNode();
     _confirmPasswordFocusNode = FocusNode();
@@ -50,6 +53,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _passwordController.dispose();
     _confirmPasswordController.dispose();
     // Focus Nodes
+    _nameFocusNode = FocusNode();
     _emailFocusNode.dispose();
     _passwordFocusNode.dispose();
     _confirmPasswordFocusNode.dispose();
@@ -70,14 +74,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
         );
-        /*User? user = auth.currentUser;
+        User? user = auth.currentUser;
         final uid = user!.uid;
         await FirebaseFirestore.instance.collection("users").doc(uid).set({
           'userId': uid,
           'userName': _nameController.text,
           'userEmail': _emailController.text.toLowerCase(),
           'createdAt': Timestamp.now(),
-        });*/
+        });
         Fluttertoast.showToast(
           msg: "An account has been created",
           toastLength: Toast.LENGTH_SHORT,
@@ -119,10 +123,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          leading: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(AssetsConstant.logo),
+          title: Image.asset(
+            AssetsConstant.Splashlogo,
+            height: 50,
           ),
+          backgroundColor: kPrimaryColor,
+          centerTitle: true,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -135,6 +141,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   style: FontsStyles.teststyle28
                       .copyWith(fontWeight: FontWeight.w800),
                 ),
+                const Gutter(),
                 const Text(
                   "Sign up to Create happiness with your contributions.",
                   style: FontsStyles.teststyle15,
@@ -144,6 +151,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   key: _formKey,
                   child: Column(
                     children: [
+                      TextFormField(
+                        controller: _nameController,
+                        focusNode: _nameFocusNode,
+                        textInputAction: TextInputAction.next,
+                        keyboardType: TextInputType.name,
+                        decoration: const InputDecoration(
+                          hintText: "Full name",
+                          prefixIcon: Icon(
+                            Icons.person,
+                          ),
+                        ),
+                        validator: (value) {
+                          return AuthValidator.displayNamevalidator(value);
+                        },
+                        onFieldSubmitted: (value) {
+                          FocusScope.of(context).requestFocus(_emailFocusNode);
+                        },
+                      ),
+                      const Gutter(),
                       TextFormField(
                         controller: _emailController,
                         focusNode: _emailFocusNode,

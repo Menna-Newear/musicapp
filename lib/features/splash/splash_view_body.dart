@@ -34,7 +34,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Image.asset(AssetsConstant.logo),
+        Image.asset(AssetsConstant.Splashlogo),
         slidingText(slidingAnimation: slidingAnimation),
       ],
     );
@@ -53,7 +53,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
   void navigateToNewViewAnimated() {
     Future.delayed(const Duration(seconds: 2), () {
-      GoRouter.of(context).push('/loginScreen');
+      GoRouter.of(context).push('/HomeScreen');
     });
   }
 }

@@ -8,6 +8,7 @@ import 'package:musicapp/features/Authentication/auth/registerView.dart';
 import 'package:musicapp/features/home/homeview.dart';
 import 'package:musicapp/features/widgets/customAlertDialogMethod.dart';
 import 'package:musicapp/utilits/assets.dart';
+import 'package:musicapp/utilits/constants/constant.dart';
 import 'package:musicapp/utilits/constants/fontsStyles.dart';
 import 'package:musicapp/utilits/constants/validateAuth.dart';
 
@@ -103,10 +104,13 @@ class _LoginScreenState extends State<LoginScreen> {
         },
         child: Scaffold(
           appBar: AppBar(
-            leading: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.asset(AssetsConstant.logo),
+            automaticallyImplyLeading: false,
+            title: Image.asset(
+              AssetsConstant.Splashlogo,
+              height: 50,
             ),
+            backgroundColor: kPrimaryColor,
+            centerTitle: true,
           ),
           body: SingleChildScrollView(
             child: Padding(
@@ -115,6 +119,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 key: _formKey,
                 child: Column(
                   children: [
+                    const GutterLarge(),
+                    const GutterLarge(),
                     Center(
                       child: Text(
                         "Welcome",
@@ -122,12 +128,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             .copyWith(fontWeight: FontWeight.w800),
                       ),
                     ),
+                    const Gutter(),
                     const Text(
                       "Please enter your data to continue",
                       style: FontsStyles.teststyle15,
                     ),
-                    const GutterLarge(),
-                    const GutterLarge(),
                     const GutterLarge(),
                     const GutterLarge(),
                     TextFormField(

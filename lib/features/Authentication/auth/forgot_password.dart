@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
+import 'package:musicapp/utilits/assets.dart';
+import 'package:musicapp/utilits/constants/constant.dart';
 import 'package:musicapp/utilits/constants/fontsStyles.dart';
 import 'package:musicapp/utilits/constants/validateAuth.dart';
 
@@ -40,6 +42,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        title: Image.asset(
+          AssetsConstant.Splashlogo,
+          height: 50,
+        ),
+        backgroundColor: kPrimaryColor,
         centerTitle: true,
       ),
       body: GestureDetector(
@@ -64,7 +71,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               ),
               const Gutter(),
               Image.asset(
-                "assets/images/forget_password.png",
+                AssetsConstant.forgetPassword,
                 width: size.width * 0.6,
                 height: size.width * 0.6,
               ),
